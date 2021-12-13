@@ -303,7 +303,7 @@ GameObject:
   - component: {fileID: 5264145926473134907}
   - component: {fileID: 1779065486385619398}
   - component: {fileID: 8860118073893555159}
-  - component: {fileID: -363575530321235899}
+  - component: {fileID: 1342205507194000719}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -393,6 +393,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 896f0bcf70b815c4d8bec8050c1d3b7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  turnSpeed: 20
   shootClip: {fileID: 0}
   projectilePrefab: {fileID: 0}
   recoletable: {fileID: 0}
@@ -406,12 +407,12 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2191204958601936743}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1.2053288, z: 1.7377895}
   m_Center: {x: 0, y: -0.019140583, z: -0.36889473}
---- !u!54 &-363575530321235899
+--- !u!54 &1342205507194000719
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -421,7 +422,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0

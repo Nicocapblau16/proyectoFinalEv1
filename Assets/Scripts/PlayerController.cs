@@ -6,14 +6,17 @@ public class PlayerController : MonoBehaviour
 {
     private Vector3 startPos = new Vector3(0, 100, 0);
 
+    public Transform offset;
+
     private float limX = 200f;
     private float limY = 200f;
     private float limLowY = 0f;
     private float limZ = 200f;
 
     private  float speed = 20f;
-    //private float horizontalInput;
-    //private float verticalInput;
+    public float turnSpeed = 20f;
+    private float horizontalInput;
+    private float verticalInput;
 
     public AudioClip shootClip;
 
@@ -50,7 +53,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //inicio corrutina
-
+        StartCoroutine("SpawnObstacle");
 
         cameraAudioSource = GameObject.Find("Main Camera").GetComponent<AudioSource>();
         playerAudioSource = GetComponent<AudioSource>();
@@ -61,9 +64,11 @@ public class PlayerController : MonoBehaviour
     {
         //movimiento constante
         transform.Translate(Vector3.forward * Time.deltaTime * speed);
-
-       // horizontalInput = Input.GetAxis("Horizontal");
-        //verticalInput = Input.GetAxis("Vertical");
+        //controles
+        horizontalInput = Input.GetAxis("Horizontal");
+        verticalInput = Input.GetAxis("Vertical");
+        transform.Rotate(Vector3.up, turnSpeed * Time.deltaTime * horizontalInput);
+        transform.Rotate(Vector3.right, turnSpeed * Time.deltaTime * -verticalInput);
 
         //limites
         if (transform.position.x <= -limX)
@@ -92,17 +97,17 @@ public class PlayerController : MonoBehaviour
         }
 
         //rotacion ortopedica del helicoptero
-        RotateGameObject(KeyCode.A, new Vector3(0, -10, 0));
-        RotateGameObject(KeyCode.D, new Vector3(0, 10, 0));
-        RotateGameObject(KeyCode.W, new Vector3(-10, 0, 0));
-        RotateGameObject(KeyCode.S, new Vector3(10, 0, 0));
+        //RotateGameObject(KeyCode.A, new Vector3(0, -10, 0));
+        //RotateGameObject(KeyCode.D, new Vector3(0, 10, 0));
+        //RotateGameObject(KeyCode.W, new Vector3(-10, 0, 0));
+        //RotateGameObject(KeyCode.S, new Vector3(10, 0, 0));
 
 
 
         if (Input.GetKeyDown(KeyCode.RightControl))
         {
             //disparo
-            Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation = transform.rotation);
+            Instantiate(projectilePrefab, offset.position, projectilePrefab.transform.rotation = transform.rotation);
 
             playerAudioSource.PlayOneShot(shootClip, 1);
         }
@@ -131,6 +136,44 @@ public class PlayerController : MonoBehaviour
             randomPos = RandomPosition();
             Instantiate(obstacle, randomPos, recoletable.transform.rotation);
 
+        }
+
+    }
+    private void OnCollisionEnter(Collision otherCollider)
+    {
+        if (!gameOver)
+        {
+            if (otherCollider.gameObject.CompareTag("Coin"))
+            {
+
+            }
+            else if (otherCollider.gameObject.CompareTag("Obstacle"))
+            {
+
+                gameOver = true;
+            }
+        }
+
+    }
+
+    //recojer monedas
+    private void OnTriggerEnter(Collider otherTrigger)
+    {
+        if (otherTrigger.gameObject.CompareTag("Coin"))
+        {
+            Destroy(otherTrigger.gameObject);
+            score = score + 1;
+        }
+
+    }
+    //game over
+    private void OnCollisionEnter(Collider otherCollider)
+    {
+        if (otherCollider.gameObject.CompareTag("Obstacle"))
+        {
+            Destroy(otherCollider.gameObject);
+            Destroy(gameObject);
+            Debug.Log($"Puntuacion final:{score}");
         }
 
     }
