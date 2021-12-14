@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1393300444040498175}
   - component: {fileID: 480104762246055410}
   - component: {fileID: 7833439523116399524}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,7 +111,7 @@ GameObject:
   - component: {fileID: 9157670148343885986}
   - component: {fileID: 6018621179917109747}
   - component: {fileID: 3078157864076820695}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bomb
   m_TagString: Bomb
   m_Icon: {fileID: 0}
@@ -125,7 +125,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8399505582000613533}
-  m_LocalRotation: {x: 0.3504646, y: 0.044715997, z: 0.014803826, w: 0.9353908}
+  m_LocalRotation: {x: -0.17818435, y: -0.183278, z: -0.6445077, w: -0.72060347}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -250,7 +250,7 @@ GameObject:
   - component: {fileID: 6287252857634985384}
   - component: {fileID: 4856721775233819558}
   - component: {fileID: 2909257458601614152}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: rr
   m_TagString: Untagged
   m_Icon: {fileID: 0}

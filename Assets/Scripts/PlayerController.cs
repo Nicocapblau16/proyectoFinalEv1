@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     private Vector3 startPos = new Vector3(0, 100, 0);
 
-    public Transform offset;
+
 
     private float limX = 200f;
     private float limY = 200f;
@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     private float limZ = 200f;
 
     private  float speed = 20f;
-    public float turnSpeed = 20f;
+    private float turnSpeed = 20f;
     private float horizontalInput;
     private float verticalInput;
 
@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 randomPos;
 
-    private int score;
+    public int score;
 
     public bool gameOver = false;
 
@@ -107,9 +107,14 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.RightControl))
         {
             //disparo
-            Instantiate(projectilePrefab, offset.position, projectilePrefab.transform.rotation = transform.rotation);
+            Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation = transform.rotation);
 
             playerAudioSource.PlayOneShot(shootClip, 1);
+        }
+
+        if (score == 10)
+        {
+            gameOver = true;
         }
     }
 
@@ -157,6 +162,7 @@ public class PlayerController : MonoBehaviour
     }
 
     //recojer monedas
+
     private void OnTriggerEnter(Collider otherTrigger)
     {
         if (otherTrigger.gameObject.CompareTag("Coin"))
@@ -164,17 +170,13 @@ public class PlayerController : MonoBehaviour
             Destroy(otherTrigger.gameObject);
             score = score + 1;
         }
-
-    }
-    //game over
-    private void OnCollisionEnter(Collider otherCollider)
-    {
-        if (otherCollider.gameObject.CompareTag("Obstacle"))
+        if (otherTrigger.gameObject.CompareTag("Obstacle"))
         {
-            Destroy(otherCollider.gameObject);
+            Destroy(otherTrigger.gameObject);
             Destroy(gameObject);
             Debug.Log($"Puntuacion final:{score}");
         }
 
     }
+    //game over
 }
