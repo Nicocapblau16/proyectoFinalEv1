@@ -14,7 +14,6 @@ public class GameManager : MonoBehaviour
     //public TextMeshProUGUI gameOverText;
 
     private string message;
-    private string gameOverMessage = "Game Over!";
 
 
     
